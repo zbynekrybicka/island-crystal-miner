@@ -8,8 +8,6 @@ export default function() {
 
     return <>
         <input type="text" placeholder="E-mail" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Confirm password" />
         <SendButton label="Zaregistrovat se"
             loader={loader}
             onClick={() => postSignUpAction(setLoader)} />
