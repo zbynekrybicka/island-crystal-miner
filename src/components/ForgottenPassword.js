@@ -1,5 +1,5 @@
 import loaderAtom from "../recoil/loaderAtom"
-import postClearPasswordAction from '../postClearPasswordAction'
+import postClearPasswordAction from '../actions/postClearPasswordAction'
 
 export default function() {
     const [loader, setLoader] = useRecoilState(loaderAtom)
