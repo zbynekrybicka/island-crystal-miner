@@ -3,9 +3,7 @@ import { useRecoilValue } from "recoil"
 import ActionMining from './ActionMining'
 import PrepareMining from './PrepareMining'
 
-function Game() {
+export default function () {
     const inGame = useRecoilValue(inGameSelector)
     return inGame ? <ActionMining /> : <PrepareMining />
 }
-
-export default Game
