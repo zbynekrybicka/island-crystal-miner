@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import postSingInAction from '../actions/postSingInAction'
+import postSignInAction from '../actions/postSignInAction'
 
 export default function() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const [loader, setLoader] = useRecoilState(singInLoaderAtom)
+    const [loader, setLoader] = useRecoilState(signInLoaderAtom)
     const setErrorMessage = useSetRecoilState(errorMessageAtom)
     const setUser = useSetRecoilState(userAtom)
 
@@ -21,6 +21,6 @@ export default function() {
             onChange={e => setPassword(e.target.value)} />
         <SendButton label="Přihlásit se" 
             loader={loader} 
-            onClick={() => postSingInAction(setLoader, setErrorMessage, signInValues, setUser)} />
+            onClick={() => postSignInAction(setLoader, setErrorMessage, signInValues, setUser)} />
     </>
 }
