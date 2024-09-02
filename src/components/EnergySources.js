@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil"
 
-import miningEnergySourcesSelector from './recoil/miningEnergySourcesSelector'
+import miningEnergySourcesSelector from '../recoil/miningEnergySourcesSelector'
 import chargeBatteryAction from '../actions/chargeBatteryAction'
 
 export default function() {
