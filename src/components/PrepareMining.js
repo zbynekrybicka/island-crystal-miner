@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 
 import MachineList from './MachineList'
+import SuppliedMachine from './SuppliedMachine'
 
 import crystalAtom from '../recoil/crystalAtom'
 import userAtom from '../recoil/userAtom'
@@ -28,8 +29,9 @@ const PrepareMining = function() {
     return <>
         <h1>Jste přihlášen jako {name}</h1>
         <h2>Máte krystalů: {crystal}</h2>
-        <MachineList 
+        <MachineList
             loader={loader}
+            MachineItemTemplate={SuppliedMachine}
             fromMachinesSelector={suppliedMachinesList}
             machineActionArray={[ buyEquipmentAction(
                 setLoader, 

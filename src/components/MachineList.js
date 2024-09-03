@@ -1,12 +1,17 @@
 const MachineList = function({
-    machineItemTemplate, 
-    machineActionArray, 
     fromMachinesSelector, 
-    fromMachinesAtom, 
-    toMachinesSelectorProps, 
-    crystalAtom
+    MachineItemTemplate,     
+    machineActionArray
 }) {
-    return <></>
+
+    return <>
+        {fromMachinesSelector.map((item, index) => <MachineItemTemplate 
+            key={index}
+            index={index}
+            item={item} 
+            machineActionArray={machineActionArray}
+        /> )}
+    </>
 }
 
 export default MachineList

@@ -4,5 +4,6 @@ import prod from './prodDefaults'
 const data = {...prod, ...dev}
 
 const userAtom = data.userAtom
+const suppliedMachinesAtom = data.suppliedMachinesAtom
 
-export { userAtom } 
+export { userAtom, suppliedMachinesAtom } 
