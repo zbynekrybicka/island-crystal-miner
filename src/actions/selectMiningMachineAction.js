@@ -1,3 +1,5 @@
-export default function() {
-    
+const selectMiningMachineAction = function() {
+
 }
+
+export default selectMiningMachineAction

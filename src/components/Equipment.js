@@ -1,9 +1,11 @@
 import MiningMachines from './MiningMachines'
 import EnergySources from './EnergySources'
 
-export default function() {
+const Equipment = function() {
     return <>
         <MiningMachines />
         <EnergySources />
     </>
 }
+
+export default Equipment

@@ -8,7 +8,7 @@ import SendButton from "./SendButton"
 import loginPageAtom from "../recoil/loginPageAtom"
 import loginPageGotoAction from '../actions/loginPageGotoAction'
 
-export default function() {
+const SignIn = function() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -36,3 +36,5 @@ export default function() {
         <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "forgottenPassword")}>Zapomenuté heslo</a>
     </>
 }
+
+export default SignIn

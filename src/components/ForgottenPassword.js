@@ -5,7 +5,7 @@ import SendButton from './SendButton'
 import loginPageGotoAction from "../actions/loginPageGotoAction"
 import loginPageAtom from "../recoil/loginPageAtom"
 
-export default function() {
+const ForgottenPassword = function() {
     const [loader, setLoader] = useRecoilState(loaderAtom)
     const setLoginPage = useSetRecoilState(loginPageAtom)
 
@@ -17,3 +17,5 @@ export default function() {
         <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "signIn")}>Přihlásit se</a>
     </>
 }
+
+export default ForgottenPassword

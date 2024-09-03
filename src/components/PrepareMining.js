@@ -4,10 +4,12 @@ import MachineList from './MachineList'
 
 import crystalAtom from '../recoil/crystalAtom'
 
-export default function() {
+const PrepareMining = function() {
     const crystal = useRecoilValue(crystalAtom)
 
     return <>
         <MachineList />
     </>
 }
+
+export default PrepareMining

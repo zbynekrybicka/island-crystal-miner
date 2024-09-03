@@ -1,3 +1,5 @@
-export default function() {
+const mineAction = function() {
     
 }
+
+export default mineAction

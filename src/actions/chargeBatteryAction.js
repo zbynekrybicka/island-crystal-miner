@@ -1,3 +1,5 @@
-export default function() {
+const chargeBatteryAction = function() {
     
 }
+
+export default chargeBatteryAction

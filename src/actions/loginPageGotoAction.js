@@ -1,4 +1,6 @@
-export default function(e, setLoginPage, page) {
+const loginPageGotoAction = function(e, setLoginPage, page) {
     e.preventDefault()
     setLoginPage(page)
 }
+
+export default loginPageGotoAction

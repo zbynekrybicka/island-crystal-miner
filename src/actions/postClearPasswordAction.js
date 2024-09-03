@@ -1,7 +1,7 @@
 import axios from "axios";
 import { baseUrl } from '../constants' 
 
-export default function(setLoader, setErrorMessage, setSuccessMessage, setLoginPage, email) {
+const postClearPasswordAction = function(setLoader, setErrorMessage, setSuccessMessage, setLoginPage, email) {
     setLoader(true)
     axios.post(baseUrl + '/users/clear-password', email)
         .then(() => {
@@ -12,3 +12,5 @@ export default function(setLoader, setErrorMessage, setSuccessMessage, setLoginP
         .finally(() => setLoader(false))
 
 }
+
+export default postClearPasswordAction

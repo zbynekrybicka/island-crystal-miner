@@ -5,7 +5,7 @@ import postSetPasswordAction from '../actions/postSetPasswordAction'
 import SendButton from "./SendButton"
 import { useState } from "react"
 
-export default function() {
+const SetPassword = function() {
     const [loader, setLoader] = useRecoilState(loaderAtom)
     const setErrorMessage = useSetRecoilState(errorMessageAtom)
 
@@ -15,10 +15,12 @@ export default function() {
     const passwordState = { password, confirm }
 
     return <>
-        <input type="password" placeholder="Heslo" />
-        <input type="password" placeholder="Potvrdit heslo" />
+        <input type="password" placeholder="Heslo" onChange={e => setPassword(e.target.value)} />
+        <input type="password" placeholder="Potvrdit heslo" onChange={e => setConfirm(e.target.value)} />
         <SendButton label="Nastavit heslo"
             loader={loader}
             onClick={() => postSetPasswordAction(setLoader, setErrorMessage, passwordState)} />
     </>
 }
+
+export default SetPassword

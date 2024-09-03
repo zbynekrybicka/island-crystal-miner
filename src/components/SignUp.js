@@ -8,7 +8,7 @@ import { useState } from "react"
 import loginPageGotoAction from "../actions/loginPageGotoAction"
 import loginPageAtom from "../recoil/loginPageAtom"
 
-export default function() {
+const SignUp = function() {
     const [loader, setLoader] = useRecoilState(signUpLoaderAtom)
     const [email, setEmail] = useState("")
     const setErrorMessage = useSetRecoilState(errorMessageAtom)
@@ -23,3 +23,5 @@ export default function() {
         <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "signIn")}>Přihlásit se</a>
     </>
 }
+
+export default SignUp

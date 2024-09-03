@@ -1,3 +1,12 @@
-export default function(machineItemTemplate, machineActionArray, fromMachinesSelector, fromMachinesAtom, toMachinesSelectorProps, crystalAtom) {
+const MachineList = function({
+    machineItemTemplate, 
+    machineActionArray, 
+    fromMachinesSelector, 
+    fromMachinesAtom, 
+    toMachinesSelectorProps, 
+    crystalAtom
+}) {
     return <></>
 }
+
+export default MachineList

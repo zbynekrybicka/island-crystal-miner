@@ -1,9 +1,11 @@
 import Map from './Map'
 import Equipment from './Equipment'
 
-export default function() {
+const ActionMining = function() {
     return <>
         <Map />
         <Equipment />
     </>
 }
+
+export default ActionMining
