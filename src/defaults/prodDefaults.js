@@ -1,4 +1,6 @@
 export default {
     userAtom: null,
-    suppliedMachinesAtom: []
+    suppliedMachinesAtom: [],
+    availableMachinesAtom: [],
+    selectedMachinesAtom: [],
 }

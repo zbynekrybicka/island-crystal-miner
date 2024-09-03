@@ -5,5 +5,7 @@ const data = {...prod, ...dev}
 
 const userAtom = data.userAtom
 const suppliedMachinesAtom = data.suppliedMachinesAtom
+const availableMachinesAtom = data.availableMachinesAtom
+const selectedMachinesAtom = data.selectedMachinesAtom
 
-export { userAtom, suppliedMachinesAtom } 
+export { userAtom, suppliedMachinesAtom, availableMachinesAtom, selectedMachinesAtom } 
