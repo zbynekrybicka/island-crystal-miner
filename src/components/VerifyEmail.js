@@ -1,5 +1,9 @@
-import getVerifyEmailAction from '../actions/getVerifyEmailAction'
+import { useRecoilValue } from "recoil"
+import verifyEmailSelector from "../recoil/verifyEmailSelector"
+
 
 export default function() {
-    return <></>
+    const verifyEmailResult = useRecoilValue(verifyEmailSelector)
+
+    return <>{verifyEmailResult ? "E-mail byl úspěšně verifikován" : "E-mail nebyl verifikován, zkuste to znovu."}</>
 }
