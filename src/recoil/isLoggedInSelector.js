@@ -3,5 +3,14 @@ import userAtom from './userAtom'
 
 export default selector({
     key: 'isLoggedInSelector',
-    get: ({get}) => !!get(userAtom) 
+    get: ({get}) => {
+        const user = get(userAtom) 
+        if (!user) {
+            return false
+        }
+        if (!user.isLoggedIn) {
+            return false
+        }
+        return true
+    }
 })
