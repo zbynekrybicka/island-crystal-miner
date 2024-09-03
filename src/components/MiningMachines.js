@@ -8,7 +8,7 @@ const MiningMachines = function() {
     const miningMachines = useRecoilValue(miningMachinesSelector)
 
     return <>
-        <button onClick={() => selectMiningMachineAction()}></button>
+        <button onClick={() => selectMiningMachineAction()}>Zvolit stroj</button>
     </>
 }
 

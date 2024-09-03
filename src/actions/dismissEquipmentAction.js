@@ -3,20 +3,15 @@ import { baseUrl } from '../constants'
 
 const sellEquipmentAction = (setLoader, 
     setErrorMessage, 
-    setCrystal, 
     setSelectedMachines, 
     setAvailableMachines, 
     
-    crystal, 
     selectedMachines, 
     availableMachines) => index => {
 
         setLoader(true)
-        axios.post(baseUrl + '/equipment/sell', { machine_id: selectedMachines[index] })
-            .then(res => {
-                const m_crystal = crystal + res.data.paid
-                setCrystal(m_crystal)
-                
+        axios.post(baseUrl + '/equipment/dismiss', { machine_id: selectedMachines[index] })
+            .then(() => {                
                 const m_selectedMachines = [...selectedMachines]
                 const m_dismissedMachineId = m_selectedMachines.splice(index, 1)
                 setSelectedMachines(m_selectedMachines)

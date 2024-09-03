@@ -8,7 +8,7 @@ const Map = function() {
     const miningMachines = useRecoilValue(miningMachinesSelector)
 
     return <>
-        <button onClick={() => mineAction()}></button>
+        <button onClick={() => mineAction()}>Těžit</button>
     </>
 }
 

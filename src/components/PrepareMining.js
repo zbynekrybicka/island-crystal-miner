@@ -60,19 +60,19 @@ const PrepareMining = function() {
             loader={loader}
             MachineItemTemplate={SuppliedMachine}
             fromMachinesSelector={suppliedMachinesList}
-            machineActionArray={[ buyEquipmentAction(buyEquipmentActionParams) ]}
+            machineActionArray={[ buyEquipmentAction(...buyEquipmentActionParams) ]}
         />
         <MachineList
             loader={loader}
             MachineItemTemplate={AvailableMachine}
             fromMachinesSelector={availableMachinesList}
-            machineActionArray={[ sellEquipmentAction(sellEquipmentActionParams), selectEquipmentAction(selectEquipmentActionParams) ]}
+            machineActionArray={[ sellEquipmentAction(...sellEquipmentActionParams), selectEquipmentAction(...selectEquipmentActionParams) ]}
         />
         <MachineList
             loader={loader}
             MachineItemTemplate={SelectedMachine}
             fromMachinesSelector={selectedMachinesList}
-            machineActionArray={[ dismissEquipmentAction(dismissEquipmentActionParams) ]}
+            machineActionArray={[ dismissEquipmentAction(...dismissEquipmentActionParams) ]}
         />
     </>
 }

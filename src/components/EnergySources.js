@@ -8,7 +8,7 @@ const EnergySources = function() {
     const miningEnergySources = useRecoilValue(miningEnergySourcesSelector)
 
     return <>
-        <button onClick={() => chargeBatteryAction()}></button>
+        <button onClick={() => chargeBatteryAction()}>Dobít baterii</button>
     </>
 }
 
