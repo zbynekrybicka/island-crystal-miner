@@ -1,6 +1,7 @@
 import axios from "axios";
+import { baseUrl } from '../constants' 
 
-export default function(setLoader, setErrorMessage, setSuccessMessage) {
+export default function(setLoader, setErrorMessage, setSuccessMessage, setLoginPage) {
     setLoader(true)
     axios.post(baseUrl + '/users/clear-password', {})
         .then(() => {
