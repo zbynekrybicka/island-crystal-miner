@@ -1,12 +1,15 @@
+import { useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import signUpLoaderAtom from '../recoil/loaderAtom'
+
 import SendButton from './SendButton'
-import postSignUpAction from "../actions/postSignUpAction"
+
+import signUpLoaderAtom from '../recoil/loaderAtom'
 import errorMessageAtom from "../recoil/errorMessageAtom"
 import messageAtom from '../recoil/messageAtom'
-import { useState } from "react"
-import loginPageGotoAction from "../actions/loginPageGotoAction"
 import loginPageAtom from "../recoil/loginPageAtom"
+
+import postSignUpAction from "../actions/postSignUpAction"
+import loginPageGotoAction from "../actions/loginPageGotoAction"
 
 const SignUp = function() {
     const [loader, setLoader] = useRecoilState(signUpLoaderAtom)

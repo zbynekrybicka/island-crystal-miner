@@ -1,12 +1,12 @@
 import { useRecoilValue } from "recoil";
 
-import loginPageSelector from "../recoil/loginPageSelector";
-
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import VerifyEmail from './VerifyEmail'
 import ForgottenPassword from './ForgottenPassword'
 import SetPassword from './SetPassword'
+
+import loginPageSelector from "../recoil/loginPageSelector";
 
 
 const Login = function () {

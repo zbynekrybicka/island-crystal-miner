@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 
 import MachineList from './MachineList'
 
@@ -7,14 +7,15 @@ import userAtom from '../recoil/userAtom'
 import suppliedMachinesAtom from '../recoil/suppliedMachinesAtom'
 import availableMachinesAtom from '../recoil/availableMachinesAtom'
 import errorMessageAtom from '../recoil/errorMessageAtom'
+import machineListLoaderAtom from '../recoil/machineListLoaderAtom'
+
 import suppliedMachinesSelector from '../recoil/suppliedMachinesSelector'
-import machineListLoader from '../recoil/machineListLoader'
 
 import buyEquipmentAction from '../actions/buyEquipmentAction'
 
 const PrepareMining = function() {
     const [crystal, setCrystal] = useRecoilState(crystalAtom)
-    const [loader, setLoader] = useRecoilState(machineListLoader)
+    const [loader, setLoader] = useRecoilState(machineListLoaderAtom)
     const [suppliedMachines, setSuppliedMachines] = useRecoilState(suppliedMachinesAtom)
     const [availableMachines, setAvailableMachines] = useRecoilState(availableMachinesAtom)
 

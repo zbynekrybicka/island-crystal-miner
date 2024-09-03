@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
+
+import SendButton from "./SendButton"
+
 import loaderAtom from "../recoil/loaderAtom"
 import errorMessageAtom from '../recoil/errorMessageAtom'
 import postSetPasswordAction from '../actions/postSetPasswordAction'
-import SendButton from "./SendButton"
-import { useState } from "react"
 
 const SetPassword = function() {
     const [loader, setLoader] = useRecoilState(loaderAtom)

@@ -1,5 +1,7 @@
 import { useRecoilValue } from 'recoil'
+
 import mineAction from '../actions/mineAction'
+
 import miningMachinesSelector from '../recoil/miningMachinesSelector'
 
 const Map = function() {

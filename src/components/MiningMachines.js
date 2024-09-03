@@ -1,6 +1,8 @@
 import { useRecoilValue } from "recoil"
-import miningMachinesSelector from '../recoil/miningMachinesSelector'
+
 import selectMiningMachineAction from '../actions/selectMiningMachineAction'
+
+import miningMachinesSelector from '../recoil/miningMachinesSelector'
 
 const MiningMachines = function() {
     const miningMachines = useRecoilValue(miningMachinesSelector)

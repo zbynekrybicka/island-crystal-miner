@@ -1,7 +1,8 @@
 import { useRecoilValue } from "recoil"
 
-import miningEnergySourcesSelector from '../recoil/miningEnergySourcesSelector'
 import chargeBatteryAction from '../actions/chargeBatteryAction'
+
+import miningEnergySourcesSelector from '../recoil/miningEnergySourcesSelector'
 
 const EnergySources = function() {
     const miningEnergySources = useRecoilValue(miningEnergySourcesSelector)
