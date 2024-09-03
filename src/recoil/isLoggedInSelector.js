@@ -8,7 +8,7 @@ export default selector({
         if (!user) {
             return false
         }
-        if (!user.isLoggedIn) {
+        if (!user.isValidUser) {
             return false
         }
         return true
