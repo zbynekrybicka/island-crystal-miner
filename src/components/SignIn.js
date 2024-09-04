@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useSetRecoilState } from "recoil"
 
-import signInLoaderAtom from '../recoil/loaderAtom'
 import errorMessageAtom from '../recoil/errorMessageAtom'
 import userAtom from '../recoil/userAtom'
 import SendButton from "./SendButton"
@@ -14,7 +13,7 @@ const SignIn = function() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const [loader, setLoader] = useRecoilState(signInLoaderAtom)
+    const [loader, setLoader] = useState(false)
 
     const setErrorMessage = useSetRecoilState(errorMessageAtom)
     const setUser = useSetRecoilState(userAtom)

@@ -1,12 +1,15 @@
-import loaderAtom from "../recoil/loaderAtom"
-import postClearPasswordAction from '../actions/postClearPasswordAction'
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useState } from "react"
+import { useSetRecoilState } from "recoil"
+
 import SendButton from './SendButton'
-import loginPageGotoAction from "../actions/loginPageGotoAction"
+
 import loginPageAtom from "../recoil/loginPageAtom"
 
+import loginPageGotoAction from "../actions/loginPageGotoAction"
+import postClearPasswordAction from '../actions/postClearPasswordAction'
+
 const ForgottenPassword = function() {
-    const [loader, setLoader] = useRecoilState(loaderAtom)
+    const [loader, setLoader] = useState(false)
     const setLoginPage = useSetRecoilState(loginPageAtom)
 
     return <>

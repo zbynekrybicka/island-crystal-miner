@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { baseUrl } from '../constants'
 
-const sellEquipmentAction = (setLoader, 
+const sellEquipmentAction = (
     setErrorMessage, 
     setCrystal, 
     setAvailableMachines, 
@@ -9,7 +9,7 @@ const sellEquipmentAction = (setLoader,
     
     crystal, 
     availableMachines,
-    suppliedMachines) => index => {
+    suppliedMachines) => (setLoader, index) => {
 
         setLoader(true)
         axios.post(baseUrl + '/equipment/sell', { machine_id: availableMachines[index] })

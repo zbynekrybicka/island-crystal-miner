@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { baseUrl } from '../constants'
 
-const sellEquipmentAction = (setLoader, 
+const sellEquipmentAction = ( 
     setErrorMessage, 
     setSelectedMachines, 
     setAvailableMachines, 
     
     selectedMachines, 
-    availableMachines) => index => {
+    availableMachines) => (setLoader, index) => {
 
         setLoader(true)
         axios.post(baseUrl + '/equipment/dismiss', { machine_id: selectedMachines[index] })

@@ -6,7 +6,6 @@ import AvailableMachine from './AvailableMachine'
 import SelectedMachine from './SelectedMachine'
 
 import errorMessageAtom from '../recoil/errorMessageAtom'
-import machineListLoaderAtom from '../recoil/machineListLoaderAtom'
 import crystalAtom from '../recoil/crystalAtom'
 import userAtom from '../recoil/userAtom'
 import suppliedMachinesAtom from '../recoil/suppliedMachinesAtom'
@@ -24,7 +23,6 @@ import dismissEquipmentAction from '../actions/dismissEquipmentAction'
 
 const PrepareMining = function() {
     const [crystal, setCrystal] = useRecoilState(crystalAtom)
-    const [loader, setLoader] = useRecoilState(machineListLoaderAtom)
     const [suppliedMachines, setSuppliedMachines] = useRecoilState(suppliedMachinesAtom)
     const [availableMachines, setAvailableMachines] = useRecoilState(availableMachinesAtom)
     const [selectedMachines, setSelectedMachines] = useRecoilState(selectedMachinesAtom)
@@ -38,38 +36,35 @@ const PrepareMining = function() {
     const setErrorMessage = useResetRecoilState(errorMessageAtom)
 
     const buyEquipmentActionParams = [
-        setLoader, setErrorMessage, setCrystal, setSuppliedMachines, setAvailableMachines, 
+        setErrorMessage, setCrystal, setSuppliedMachines, setAvailableMachines, 
         crystal, suppliedMachines, availableMachines
     ]
     const sellEquipmentActionParams = [
-        setLoader, setErrorMessage, setCrystal, setAvailableMachines, setSuppliedMachines,
+        setErrorMessage, setCrystal, setAvailableMachines, setSuppliedMachines,
         crystal, availableMachines, suppliedMachines
     ]
     const selectEquipmentActionParams = [
-        setLoader, setErrorMessage, setAvailableMachines, setSelectedMachines,
+        setErrorMessage, setAvailableMachines, setSelectedMachines,
         availableMachines, selectedMachines
     ]
     const dismissEquipmentActionParams = [
-        setLoader, setErrorMessage, setSelectedMachines, setAvailableMachines,
+        setErrorMessage, setSelectedMachines, setAvailableMachines,
         selectedMachines, availableMachines
     ]
     return <>
         <h1>Jste přihlášen jako {name}</h1>
         <h2>Máte krystalů: {crystal}</h2>
         <MachineList
-            loader={loader}
             MachineItemTemplate={SuppliedMachine}
             fromMachinesSelector={suppliedMachinesList}
             machineActionArray={[ buyEquipmentAction(...buyEquipmentActionParams) ]}
         />
         <MachineList
-            loader={loader}
             MachineItemTemplate={AvailableMachine}
             fromMachinesSelector={availableMachinesList}
             machineActionArray={[ sellEquipmentAction(...sellEquipmentActionParams), selectEquipmentAction(...selectEquipmentActionParams) ]}
         />
         <MachineList
-            loader={loader}
             MachineItemTemplate={SelectedMachine}
             fromMachinesSelector={selectedMachinesList}
             machineActionArray={[ dismissEquipmentAction(...dismissEquipmentActionParams) ]}
