@@ -19,3 +19,4 @@ $router->get('/', function () use ($router) {
 
 
 $router->get('/hello', ['uses' => 'HelloController@helloWorld']);
+$router->post('/sign-in', ['uses' => 'UserSignInController@execute']);
