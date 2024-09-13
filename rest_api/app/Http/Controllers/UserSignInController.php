@@ -35,14 +35,15 @@ class UserSignInController extends BaseController
     private function validateData($data, &$error) 
     {
         $data = (array) $data;
-        $error['invalidInput'] = [];
+        $error = [400, []];
+        $messageIndex = 1;
         if (!array_key_exists("email", $data)) {
-            array_push($error['invalidInput'], "Invalid email input");
+            array_push($error[$messageIndex], "Invalid email input");
         }
         if (!array_key_exists("password", $data)) {
-            array_push($error['invalidInput'], "Invalid password input");
+            array_push($error[$messageIndex], "Invalid password input");
         }
-        return !count($error['invalidInput']);
+        return !count($error[$messageIndex]);
     }
 
 
@@ -59,7 +60,7 @@ class UserSignInController extends BaseController
         if (password_verify($password, $hash)) {
             return true;
         } else {
-            $error = ["badPassword" => "Chybné heslo"];
+            $error = [400, "Chybné heslo"];
             return false;
         }
     }
@@ -84,7 +85,8 @@ class UserSignInController extends BaseController
             ) {
                 return response()->json($jwt, 200);
             } else {
-                return response()->json($error, 400);
+                list($status, $message) = $error;
+                return response()->json($message, $status);
             }
         } catch (\Exception $e) {
             return response->json($e->getMessage(), 500);
