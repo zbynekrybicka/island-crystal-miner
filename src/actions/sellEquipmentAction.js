@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { baseUrl } from '../constants'
+import { axios } from '../constants'
 
 const sellEquipmentAction = (
     setErrorMessage, 
@@ -12,7 +11,7 @@ const sellEquipmentAction = (
     suppliedMachines) => (setLoader, index) => {
 
         setLoader(true)
-        axios.post(baseUrl + '/equipment/sell', { machine_id: availableMachines[index] })
+        axios.post('/equipment/sell', { machine_id: availableMachines[index] })
             .then(res => {
                 const m_crystal = crystal + res.data.paid
                 setCrystal(m_crystal)

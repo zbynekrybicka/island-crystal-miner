@@ -13,8 +13,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Http\Request;
+
+$router->get('/', function (Request $request) use ($router) {
+    // return response("", 204)->withCookie(Cookie::create("Authorization", "Bearer", time() + 3600));
+    return json_encode($request->cookie("Authorization"));
 });
 
 $router->get('/users', ['uses' => 'UserGetGameDataController@execute']);

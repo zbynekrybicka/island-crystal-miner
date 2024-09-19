@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { baseUrl } from '../constants'
+import { axios } from '../constants'
 
 const sellEquipmentAction = (
     setErrorMessage, 
@@ -9,7 +8,7 @@ const sellEquipmentAction = (
     availableMachines,
     selectedMachines) => (setLoader, index) => {
         setLoader(true)
-        axios.post(baseUrl + '/equipment/select', { machine_id: availableMachines[index] })
+        axios.post('/equipment/select', { machine_id: availableMachines[index] })
             .then(() => {
                 const m_availableMachines = [...availableMachines]
                 const m_selectedMachineId = m_availableMachines.splice(index, 1)

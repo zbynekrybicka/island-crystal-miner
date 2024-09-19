@@ -1,9 +1,8 @@
-import axios from "axios";
-import { baseUrl } from '../constants' 
+import { axios } from '../constants'
 
 const postClearPasswordAction = function(setLoader, setErrorMessage, setSuccessMessage, setLoginPage, email) {
     setLoader(true)
-    axios.post(baseUrl + '/users/clear-password', email)
+    axios.post('/users/clear-password', email)
         .then(() => {
             setSuccessMessage("Požadavek na obnovu hesla byl přijat.")
             setLoginPage("signIn")

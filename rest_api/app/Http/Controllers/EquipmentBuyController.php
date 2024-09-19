@@ -29,7 +29,7 @@ class EquipmentBuyController extends BaseController
         try {
             if (
                 $this->userGetter->getByAuth($user, $error) &&
-                $this->equipmentChangeOwner($user, $machineId, true, $error)
+                $this->equipmentChangeOwner->run($user, $machineId, true, $error)
             ) {
                 return response(null, 204);
             } else {

@@ -29,7 +29,7 @@ class UserClearPasswordController extends BaseController
         try {
             if (
                 $this->userGetter->getByEmail($email, $user, $error) &&
-                $this->userSetPassword->run($user, null, $error) &&
+                $this->userClearPassword->run($user, null, $error) &&
                 $this->userSendEmailVerification($user, $error)
             ) {
                 return response(null, 204);

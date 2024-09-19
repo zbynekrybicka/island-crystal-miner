@@ -1,27 +1,18 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
+
+use Symfony\Component\HttpFoundation\Cookie;
+
+use App\Models\UserGetter;
 use App\Models\UserJWTencode;
+
+
 
 class UserSignInController extends BaseController
 {
-
-    private $userGetter;
-    private $userJWTencode;
-
-    /**
-     * Konstruktor
-     * 
-     * @param UserGetter $userGetter DI
-     * @param UserJWTencode $userJWTencode DI
-     */
-    public function __construct(UserGetter $userGetter, UserJWTencode $userJWTencode)
-    {
-        $this->userGetter = $userGetter;
-        $this->userJWTencode = $userJWTencode;
-    }
 
 
     /**
@@ -70,7 +61,7 @@ class UserSignInController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function execute(Request $request) 
+    public function execute(Request $request, UserGetter $userGetter, UserJWTencode $userJWTencode) 
     {
         $data = (object) $request->only(['email', 'password']);
         $user = null;
@@ -79,17 +70,17 @@ class UserSignInController extends BaseController
         try {
             if (
                 $this->validateData($data, $error) &&
-                $this->userGetter->getByEmail($data->email, $user, $error) &&
+                $userGetter->getByEmail($data->email, $user, $error) &&
                 $this->passwordVerify($data->password, $user->password, $error) &&
-                $this->userJWTencode->run($user->id, $jwt, $error)
+                $userJWTencode->run($user->id, $jwt)
             ) {
-                return response()->json($jwt, 200);
+                return response()->json($user, 200)->withCookie(Cookie::create("Authorization", "" . $jwt, time() + 3600));
             } else {
                 list($status, $message) = $error;
                 return response()->json($message, $status);
             }
         } catch (\Exception $e) {
-            return response->json($e->getMessage(), 500);
+            return response()->json($e->getMessage(), 500);
         }
 
     }

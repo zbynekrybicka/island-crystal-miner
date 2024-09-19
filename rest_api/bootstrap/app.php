@@ -118,6 +118,6 @@ $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
  ]);
 
-$app->register('App\Providers\DatabaseServiceProvider');
+$app->register(\App\Providers\ModelProvider::class);
 
 return $app;

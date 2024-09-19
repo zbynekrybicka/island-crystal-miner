@@ -31,7 +31,7 @@ class UserVerifyEmailController extends BaseController
                 $this->userGetter->getByVerifyingToken($token, $user, $error) &&
                 $this->userEmailVerify->run($user, $error)
             ) {
-                return response(null, 204);
+                return response("", 204);
             } else {
                 list($status, $message) = $error;
                 return response()->json($message, $status);
