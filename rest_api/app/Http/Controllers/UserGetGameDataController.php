@@ -26,6 +26,18 @@ class UserGetGameDataController extends BaseController
     }
 
 
+    private function getCookie(Request $request, &$cookie, &$error) 
+    {
+        $cookie = $request->cookie("Authorization");
+        if (!$cookie) {
+            $error = [204, ""];
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
     /**
      * @param Request $request
      * @return Response
@@ -35,9 +47,11 @@ class UserGetGameDataController extends BaseController
         $user = null;
         $error = [];
         $equipment = [];
+        $cookie = null;
         try {
             if (
-                $this->userGetter->getByAuth($request->cookie("Authorization"), $user, $error) &&
+                $this->getCookie($request, $cookie, $error) &&
+                $this->userGetter->getByAuth($cookie, $user, $error) &&
                 $this->equipmentGetter->getAllByOwner($user->id, $equipment, $error)
             ) {
                 return response()->json([
