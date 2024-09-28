@@ -7,7 +7,7 @@ import inGameSelector from '../recoil/inGameSelector'
 
 const Game = function () {
     const inGame = useRecoilValue(inGameSelector)
-    return inGame ? <ActionMining /> : <PrepareMining />
+    return <div className="game-frame">{inGame ? <ActionMining /> : <PrepareMining />}</div>
 }
 
 export default Game

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './sass/index.sass';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil'

@@ -4,18 +4,12 @@ namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 
+use App\Models\UserGetter;
+use App\Models\EquipmentChangeOwner;
+
 class EquipmentSellController extends BaseController
 {
-
-    /**
-     * Konstruktor
-     * 
-     */
-    public function __constructor()
-    {
-
-    }
-
+    use ErrorResponseTrait;
 
     /**
      * @param Request $request
@@ -27,17 +21,15 @@ class EquipmentSellController extends BaseController
         $error = [];
         $user = null;
         try {
-            if (
-                $this->userGetter->getByAuth($user, $error) &&
-                $this->equipmentChangeOwner($user, $machineId, false, $error)
-            ) {
-                return response(null, 204);
-            } else {
-                list($status, $message) = $error;
-                return response()->json($message, $status);
+            if (!$this->userGetter->getByAuth($user, $error)) {
+                return $this->errorResponse($error);
             }
+            if (!$this->equipmentChangeOwner($user, $machineId, false, $error)) {
+                return $this->errorResponse($error);
+            }
+            return response(null, 204);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return $this->errorResponse([500, $e->getMessage()]);
         } 
     }
 }

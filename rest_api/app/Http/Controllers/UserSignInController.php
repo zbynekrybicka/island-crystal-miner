@@ -13,6 +13,7 @@ use App\Models\UserJWTencode;
 
 class UserSignInController extends BaseController
 {
+    use ErrorResponseTrait;
 
 
     /**
@@ -68,19 +69,21 @@ class UserSignInController extends BaseController
         $jwt = null;
         $error = [];
         try {
-            if (
-                $this->validateData($data, $error) &&
-                $userGetter->getByEmail($data->email, $user, $error) &&
-                $this->passwordVerify($data->password, $user->password, $error) &&
-                $userJWTencode->run($user->id, $jwt)
-            ) {
-                return response()->json($user, 200)->withCookie(Cookie::create("Authorization", "" . $jwt, time() + 3600));
-            } else {
-                list($status, $message) = $error;
-                return response()->json($message, $status);
+            if (!$this->validateData($data, $error)) {
+                return $this->errorResponse($error);
             }
+            if (!$userGetter->getByEmail($data->email, $user, $error)) {
+                return $this->errorResponse($error);
+            }
+            if (!$this->passwordVerify($data->password, $user->password, $error)) {
+                return $this->errorResponse($error);
+            }
+            if (!$userJWTencode->run($user->id, $jwt)) {
+                return $this->errorResponse($error);
+            }
+            return response()->json($user, 200)->withCookie(Cookie::create("Authorization", "Bearer " . $jwt, time() + 3600));
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return $this->errorResponse([500, $e->getMessage()]);
         }
 
     }

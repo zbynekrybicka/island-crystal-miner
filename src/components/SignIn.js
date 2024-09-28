@@ -5,6 +5,7 @@ import errorMessageAtom from '../recoil/errorMessageAtom'
 import userAtom from '../recoil/userAtom'
 import SendButton from "./SendButton"
 import loginPageAtom from "../recoil/loginPageAtom"
+import equipmentAtom from "../recoil/equipmentAtom"
 
 import postSignInAction from '../actions/postSignInAction'
 import loginPageGotoAction from '../actions/loginPageGotoAction'
@@ -14,10 +15,12 @@ const SignIn = function() {
     const [password, setPassword] = useState("")
 
     const [loader, setLoader] = useState(false)
+    const [, setStatus] = useState("notLoaded")
 
     const setErrorMessage = useSetRecoilState(errorMessageAtom)
     const setUser = useSetRecoilState(userAtom)
     const setLoginPage = useSetRecoilState(loginPageAtom)
+    const setEquipment = useSetRecoilState(equipmentAtom)
     
     const signInValues = { email, password }
     return <>
@@ -31,10 +34,12 @@ const SignIn = function() {
             onChange={e => setPassword(e.target.value)} />
         <SendButton label="Přihlásit se" 
             loader={loader} 
-            onClick={() => postSignInAction(setLoader, setErrorMessage, signInValues, setUser)} />
+            onClick={() => postSignInAction(setLoader, setErrorMessage, signInValues, setStatus, setUser, setEquipment)} />
 
-        <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "signUp")}>Zaregistrovat se</a>
-        <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "forgottenPassword")}>Zapomenuté heslo</a>
+        <div className="last-first">
+            <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "signUp")}>Zaregistrovat se</a>
+            <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "forgottenPassword")}>Zapomenuté heslo</a>
+        </div>
     </>
 }
 

@@ -16,13 +16,15 @@ const PrepareMining = function() {
 
 
 
-    return <>
-        <h1>Jste přihlášen jako {name}</h1>
-        <h2>Máte krystalů: {crystal}</h2>
+    return <div className="prepare-mining">
+        <div className="panel">
+            <div>Jste přihlášen jako {name}</div>
+            <div>Máte krystalů: {crystal}</div>
+        </div>
         <MachineListSupplied />
         <MachineListAvailable />
         <MachineListSelected />
-    </>
+    </div>
 }
 
 export default PrepareMining

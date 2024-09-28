@@ -32,6 +32,7 @@ class UserGetter {
             $error = [400, "Token not set"];
             return false;
         }
+        $authToken = str_replace("Bearer ", "", $authToken);
         $key = env("JWT_KEY");
         $payload = JWT::decode($authToken, new Key($key, 'HS256'));
         $row = $this->db->select('*')->from('users')->where('id = %s', $payload->id)->fetch();

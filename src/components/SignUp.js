@@ -24,7 +24,10 @@ const SignUp = function() {
         <SendButton label="Zaregistrovat se"
             loader={loader}
             onClick={() => postSignUpAction(setLoader, setErrorMessage, setSuccessMessage, { name, email })} />
-        <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "signIn")}>Přihlásit se</a>
+
+        <div className="last-first">
+            <a href="#" onClick={e => loginPageGotoAction(e, setLoginPage, "signIn")}>Přihlásit se</a>
+        </div>
     </>
 }
 

@@ -10,20 +10,7 @@ use App\Models\EquipmentGetter;
 
 class UserGetGameDataController extends BaseController
 {
-
-    private $userGetter;
-    private $equipmentGetter;
-
-    /**
-     * Konstruktor
-     * 
-     * @param UserGetter $userGetter DI
-     */
-    public function __construct(UserGetter $userGetter, EquipmentGetter $equipmentGetter)
-    {
-        $this->userGetter = $userGetter;
-        $this->equipmentGetter = $equipmentGetter;
-    }
+    use ErrorResponseTrait;
 
 
     private function getCookie(Request $request, &$cookie, &$error) 
@@ -42,29 +29,28 @@ class UserGetGameDataController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function execute(Request $request) 
+    public function execute(Request $request, UserGetter $userGetter, EquipmentGetter $equipmentGetter) 
     {
-        $user = null;
         $error = [];
-        $equipment = [];
         $cookie = null;
         try {
-            if (
-                $this->getCookie($request, $cookie, $error) &&
-                $this->userGetter->getByAuth($cookie, $user, $error) &&
-                $this->equipmentGetter->getAllByOwner($user->id, $equipment, $error)
-            ) {
-                return response()->json([
-                    'user' => $user,
-                    'equipment' => $equipment
-                ], 200);
-            } else {
-                list($status, $message) = $error;
-                return response()->json($message, $status);
+            if (!$this->getCookie($request, $cookie, $error)) {
+                return $this->errorResponse($error);
             }
-            ;
+            $user = null;
+            if (!$userGetter->getByAuth($cookie, $user, $error)) {
+                return $this->errorResponse($error);
+            }
+            $equipment = [];
+            if (!$equipmentGetter->getAllByOwner($user->id, $equipment, $error)) {
+                return $this->errorResponse($error);
+            }
+            return response()->json([
+                'user' => $user,
+                'equipment' => $equipment
+            ], 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return $this->errorResponse([500, $e->getMessage()]);
         }
 
     }

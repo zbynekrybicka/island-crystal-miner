@@ -4,41 +4,34 @@ namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 
+use App\Models\UserGetter;
+use App\Models\Mining;
+
 class MiningController extends BaseController
 {
-
-    /**
-     * Konstruktor
-     * 
-     */
-    public function __constructor()
-    {
-
-    }
+    use ErrorResponseTrait;
 
 
     /**
      * @param Request $request
      * @return Response
      */
-    public function execute(Request $request)
+    public function execute(Request $request, UserGetter $userGetter, Mining $mining)
     {
         $data = $request->input("mining_data");
         $error = [];
         $result = [];
         $user = null;
         try {
-            if (
-                $this->userGetter->getByAuth($user, $error) &&
-                $this->mining->run($data, $result, $error)
-            ) {
-                return response($result, 200);
-            } else {
-                list($status, $message) = $error;
-                return response()->json($message, $status);
+            if (!$userGetter->getByAuth($user, $error)) {
+                return $this->errorResponse($error);
             }
+            if (!$mining->run($data, $result, $error)) {
+                return $this->errorResponse($error);
+            }
+            return response($result, 200);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return $this->errorResponse([500, $e->getMessage()]);
         }    
     }
 }

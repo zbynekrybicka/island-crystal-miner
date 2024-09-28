@@ -9,6 +9,7 @@ use App\Models\UserSendEmailVerification;
 
 class UserSignUpController extends BaseController
 {
+    use ErrorResponseTrait;
 
 
     private function validateData(Request $request, &$data, &$error)
@@ -39,20 +40,23 @@ class UserSignUpController extends BaseController
     {
         $error = [];
         $user = null;
+        $data = null;
         try {
-            if (
-                $this->validateData($request, $error) &&
-                $this->getData($request, $data) && 
-                $userCreate->run($data, $user, $error) &&
-                $userSendEmailVerification->run($user, $error)
-            ) {
-                return response(null, 201);
-            } else {
-                list($status, $message) = $error;
-                return response()->json($message, $status);
+            if (!$this->validateData($request, $error)) {
+                return $this->errorResponse($error);
             }
+            if (!$this->getData($request, $data)) {
+                return $this->errorResponse($error);
+            }
+            if (!$userCreate->run($data, $user, $error)) {
+                return $this->errorResponse($error);
+            }
+            if (!$userSendEmailVerification->run($user, $error)) {
+                return $this->errorResponse($error);
+            }
+            return response(null, 201);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return $this->errorResponse([500, $e->getMessage()]);
         }
     }
 }

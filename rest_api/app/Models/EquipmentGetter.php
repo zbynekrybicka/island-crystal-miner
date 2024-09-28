@@ -12,7 +12,7 @@ class EquipmentGetter {
 
     public function getAllByOwner($userId, &$equipment, &$error)
     {
-        $equipment = $this->db->select('*')->from('mining_machines')->where('user_id = %u OR user_id IS NULL', $userId)->fetchAssoc("id");
+        $equipment = $this->db->select('*')->from('mining_machines')->where('user_id = %u OR user_id IS NULL', $userId)->fetchAll();
         return true;
     }
 

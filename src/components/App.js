@@ -5,6 +5,9 @@ import Game from './Game'
 import Login from './Login'
 
 import userAtom from '../recoil/userAtom'
+import suppliedMachinesAtom from '../recoil/suppliedMachinesAtom'
+import availableMachinesAtom from '../recoil/availableMachinesAtom'
+import selectedMachinesAtom from '../recoil/selectedMachinesAtom'
 
 import isLoggedInSelector from '../recoil/isLoggedInSelector'
 
@@ -18,8 +21,13 @@ const App = function () {
   const isLoggedIn = useRecoilValue(isLoggedInSelector)
   const setUser = useSetRecoilState(userAtom)
 
+  const setSuppliedMachines = useSetRecoilState(suppliedMachinesAtom)
+  const setAvailableMachines = useSetRecoilState(availableMachinesAtom)
+  const setSelectedMachines = useSetRecoilState(selectedMachinesAtom)
+
+
   if (status === beforeLoading) {
-    getGameDataAction(setLoader, setStatus, setUser)
+    getGameDataAction(setLoader, setStatus, setUser, setSuppliedMachines, setAvailableMachines, setSelectedMachines)
   }
   return loader ? <h1>Loading...</h1> : (isLoggedIn ? <Game /> : <Login />)
 }

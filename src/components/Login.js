@@ -8,9 +8,7 @@ import SetPassword from './SetPassword'
 
 import loginPageSelector from "../recoil/loginPageSelector";
 
-
-const Login = function () {
-    const loginPage = useRecoilValue(loginPageSelector)
+const page = function (loginPage) {
     switch (loginPage) {
         case 'signUp': return <SignUp />
         case 'verifyEmail': return <VerifyEmail />
@@ -18,6 +16,12 @@ const Login = function () {
         case 'setPassword': return <SetPassword />
         default: return <SignIn />
     }
+}
+
+
+const Login = function () {
+    const loginPage = useRecoilValue(loginPageSelector)
+    return <div className="login-page">{page(loginPage)}</div>
 }
 
 export default Login
