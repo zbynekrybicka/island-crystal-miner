@@ -1,9 +1,27 @@
 .prepare-mining
   .panel
     display: flex
-    width: 100vw
+    width: calc(100vw - 17px)
     justify-content: space-between
     background-color: var(--dark)
     color: var(--light)
     div
         padding: 15px
+
+  .machines-lists
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    .machine-list
+      display: block
+      overflow-x: scroll
+      width: 100%
+      max-width: 1018px
+      padding: 15px 0
+      text-wrap: nowrap
+      .machine-item-template
+        display: inline-block
+        border: 1px solid var(--dark)
+        width: 300px
+        height: 300px
+        margin: 0 15px

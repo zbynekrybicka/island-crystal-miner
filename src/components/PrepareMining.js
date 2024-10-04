@@ -21,9 +21,11 @@ const PrepareMining = function() {
             <div>Jste přihlášen jako {name}</div>
             <div>Máte krystalů: {crystal}</div>
         </div>
-        <MachineListSupplied />
-        <MachineListAvailable />
-        <MachineListSelected />
+        <div class="machines-lists">
+            <MachineListSupplied />
+            <MachineListAvailable />
+            <MachineListSelected />
+        </div>
     </div>
 }
 

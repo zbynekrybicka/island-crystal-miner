@@ -29,7 +29,7 @@ class UserGetter {
     public function getByAuth($authToken, &$user, &$error) 
     {
         if (!$authToken) {
-            $error = [400, "Token not set"];
+            $error = ["Token not set", 400];
             return false;
         }
         $authToken = str_replace("Bearer ", "", $authToken);
@@ -40,7 +40,7 @@ class UserGetter {
             $user = (object) $row;
             return true;
         } else {
-            $error = [400, "User not found"];
+            $error = ["User not found", 400];
         }
     }
 

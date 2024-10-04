@@ -13,7 +13,6 @@ use App\Models\UserJWTencode;
 
 class UserSignInController extends BaseController
 {
-    use ErrorResponseTrait;
 
 
     /**
@@ -27,8 +26,8 @@ class UserSignInController extends BaseController
     private function validateData($data, &$error) 
     {
         $data = (array) $data;
-        $error = [400, []];
-        $messageIndex = 1;
+        $error = [[], 400];
+        $messageIndex = 0;
         if (!array_key_exists("email", $data)) {
             array_push($error[$messageIndex], "Invalid email input");
         }
@@ -52,7 +51,7 @@ class UserSignInController extends BaseController
         if (password_verify($password, $hash)) {
             return true;
         } else {
-            $error = [400, "Chybné heslo"];
+            $error = ["Chybné heslo", 400];
             return false;
         }
     }
@@ -70,20 +69,20 @@ class UserSignInController extends BaseController
         $error = [];
         try {
             if (!$this->validateData($data, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userGetter->getByEmail($data->email, $user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$this->passwordVerify($data->password, $user->password, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userJWTencode->run($user->id, $jwt)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response()->json($user, 200)->withCookie(Cookie::create("Authorization", "Bearer " . $jwt, time() + 3600));
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         }
 
     }

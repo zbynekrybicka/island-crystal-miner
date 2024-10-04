@@ -2,7 +2,7 @@ import SendButton from './SendButton'
 
 const AvailableMachine = function({ item, index, machineActionArray, setLoader }) {
     
-    return <>
+    return <div className="machine-item-template">
         {index}: {item.title}<br/>
         <SendButton label="Prodat"
             loader={false}
@@ -12,7 +12,7 @@ const AvailableMachine = function({ item, index, machineActionArray, setLoader }
             loader={false}
             onClick={() => machineActionArray[1](setLoader, index)}
         />
-    </>
+    </div>
 }
 
 export default AvailableMachine
