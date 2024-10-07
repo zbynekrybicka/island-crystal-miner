@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil'
 
-import mineAction from '../actions/mineAction'
+// import mineAction from '../actions/mineAction'
 
 import miningMachinesSelector from '../recoil/miningMachinesSelector'
 
@@ -8,7 +8,7 @@ const Map = function() {
     const miningMachines = useRecoilValue(miningMachinesSelector)
 
     return <>
-        <button onClick={() => mineAction()}>Těžit</button>
+        <button onClick={() => {}}>Těžit</button>
     </>
 }
 

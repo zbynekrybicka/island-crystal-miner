@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 import MachineList from './MachineList'
 import EnergySource from "./EnergySource"
 
-import chargeBatteryAction from '../actions/chargeBatteryAction'
+// import chargeBatteryAction from '../actions/chargeBatteryAction'
 
 import miningEnergySourcesSelector from '../recoil/miningEnergySourcesSelector'
 
@@ -14,7 +14,7 @@ const EnergySources = function() {
         <MachineList loader={false}
             MachineItemTemplate={EnergySource}
             fromMachinesSelector={miningEnergySources}
-            machineActionArray={[chargeBatteryAction()]}
+            machineActionArray={[]}
         />
     </>
 }
