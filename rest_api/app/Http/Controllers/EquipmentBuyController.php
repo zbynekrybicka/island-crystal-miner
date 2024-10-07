@@ -9,7 +9,6 @@ use App\Models\EquipmentChangeOwner;
 
 class EquipmentBuyController extends BaseController
 {
-    use ErrorResponseTrait;
  
     /**
      * @param Request $request
@@ -22,14 +21,14 @@ class EquipmentBuyController extends BaseController
         $user = null;
         try {
             if (!$userGetter->getByAuth($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$equipmentChangeOwner->run($user, $machineId, true, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response(null, 204);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         } 
     }
 }

@@ -33,20 +33,20 @@ class UserSetPasswordController extends BaseController
         $user = null;
         try {
             if (!$this-validateData($data, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userGetter->getByAuth($user, $error)) {
-                return $this->errorResponse($error);                
+                return response(...$error);                
             }
             if (!$userSetPassword->run($user, $data->password, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userSendPasswordConfirmation($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response(null, 204);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         }    
     }
 }

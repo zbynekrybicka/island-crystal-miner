@@ -23,14 +23,14 @@ class UserVerifyEmailController extends BaseController
         $user = null;
         try {
             if (!$userGetter->getByVerifyingToken($token, $user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userEmailVerify->run($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response("", 204);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         }       
     }
 }

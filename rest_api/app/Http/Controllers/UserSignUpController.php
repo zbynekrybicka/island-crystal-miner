@@ -43,20 +43,20 @@ class UserSignUpController extends BaseController
         $data = null;
         try {
             if (!$this->validateData($request, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$this->getData($request, $data)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userCreate->run($data, $user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userSendEmailVerification->run($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response(null, 201);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         }
     }
 }

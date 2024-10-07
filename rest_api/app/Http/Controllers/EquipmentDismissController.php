@@ -10,7 +10,6 @@ use App\Models\EquipmentSelect;
 
 class EquipmentDismissController extends BaseController
 {
-    use ErrorResponseTrait;
 
     /**
      * @param Request $request
@@ -23,14 +22,14 @@ class EquipmentDismissController extends BaseController
         $user = null;
         try {
             if (!$userGetter->getByAuth($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$equipmentSelect($machineId, false, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response(null, 204);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         } 
     }
 }

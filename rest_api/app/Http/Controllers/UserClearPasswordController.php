@@ -25,17 +25,17 @@ class UserClearPasswordController extends BaseController
         $user = null;
         try {
             if (!$userGetter->getByEmail($email, $user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userClearPassword->run($user, null, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$userSendEmailVerification->run($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response(null, 204);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         }          
     }
 }

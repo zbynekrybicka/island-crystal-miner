@@ -24,14 +24,14 @@ class MiningController extends BaseController
         $user = null;
         try {
             if (!$userGetter->getByAuth($user, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             if (!$mining->run($data, $result, $error)) {
-                return $this->errorResponse($error);
+                return response(...$error);
             }
             return response($result, 200);
         } catch (\Exception $e) {
-            return $this->errorResponse([500, $e->getMessage()]);
+            return response($e->getMessage(), 500);
         }    
     }
 }
